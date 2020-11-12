@@ -8,6 +8,8 @@ from training_segmentation import getModel as model_s
 from quaternion_layers.utils import Params
 import click
 import numpy as np
+import keras
+import os 
 np.random.seed(314)
 
 @click.command()
@@ -49,6 +51,8 @@ def runner(task, mode, num_blocks, start_filters, dropout, batch_size, num_epoch
         model = model_c(params)
         print()
         print(model.count_params())
+        model.summary()
+        keras.utils.plot_model(model, to_file=os.path.join(param_dict['mode']+"model.png"),show_shapes=True)
         train_c(params, model)
     elif task == 'segmentation':
         model = model_s(params)

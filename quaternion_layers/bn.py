@@ -10,11 +10,10 @@ import numpy as np
 from keras.layers import Layer, InputSpec
 from keras import initializers, regularizers, constraints
 import keras.backend as K
-import tensorflow as tf
 
 
 def sqrt_init(shape, dtype=None):
-    value = (1 / tf.sqrt(4.0)) * tf.ones(shape)
+    value = (1 / np.sqrt(4.0)) * np.ones(shape)
     return value
 
 
@@ -31,16 +30,16 @@ def quaternion_standardization(input_centred,
         variances_broadcast[0] = K.shape(input_centred)[0]
 
     # Chokesky decomposition of 4x4 symmetric matrix
-    Wrr = tf.sqrt(Vrr)
+    Wrr = np.sqrt(Vrr)
     Wri = (1.0 / Wrr) * (Vri)
-    Wii = tf.sqrt((Vii - (Wri*Wri)))
+    Wii = np.sqrt((Vii - (Wri*Wri)))
     Wrj = (1.0 / Wrr) * (Vrj)
     Wij = (1.0 / Wii) * (Vij - (Wri*Wrj))
-    Wjj = tf.sqrt((Vjj - (Wij*Wij + Wrj*Wrj)))
+    Wjj = np.sqrt((Vjj - (Wij*Wij + Wrj*Wrj)))
     Wrk = (1.0 / Wrr) * (Vrk)
     Wik = (1.0 / Wii) * (Vik - (Wri*Wrk))
     Wjk = (1.0 / Wjj) * (Vjk - (Wij*Wik + Wrj*Wrk))
-    Wkk = tf.sqrt((Vkk - (Wjk*Wjk + Wik*Wik + Wrk*Wrk)))
+    Wkk = np.sqrt((Vkk - (Wjk*Wjk + Wik*Wik + Wrk*Wrk)))
 
     # Normalization. We multiply, x_normalized = W.x.
     # The returned result will be a quaternion standardized input

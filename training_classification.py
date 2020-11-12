@@ -26,7 +26,7 @@ from keras.regularizers import l2
 from keras.utils.np_utils import to_categorical
 import keras.backend as K
 K.set_image_data_format('channels_first')
-K.set_image_dim_ordering('th')
+# K.set_image_dim_ordering('th')
 
 
 # Callbacks:
@@ -113,7 +113,7 @@ def schedule(epoch):
         if epoch == 0:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >=  10 and epoch < 100:
-        lrate = 0.01
+        lrate = 0.1
         if epoch == 10:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >= 100 and epoch < 120:

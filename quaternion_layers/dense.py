@@ -13,7 +13,6 @@ from keras import activations, initializers, regularizers, constraints
 from keras.layers import Layer, InputSpec
 from .init import QuaternionInit
 import numpy as np
-import tensorflow as tf
 
 
 class ComplexDense(Layer):
@@ -324,9 +323,9 @@ class QuaternionDense(Layer):
             data_format=data_format
         )
         if self.init_criterion == 'he':
-            s = tf.sqrt(tf.cast(1. / fan_in, tf.float32))
+            s = np.sqrt(np.cast(1. / fan_in, np.float32))
         elif self.init_criterion == 'glorot':
-            s = tf.sqrt(tf.cast(1. / (fan_in + fan_out), tf.float32))
+            s = np.sqrt(np.cast(1. / (fan_in + fan_out), np.float32))
 
         # Equivalent initialization using amplitude phase representation:
         """modulus = rng.rayleigh(scale=s, size=kernel_shape)
@@ -342,7 +341,7 @@ class QuaternionDense(Layer):
                 kernel_shape,
                 mean=0,
                 scale=s,
-                dtype=tf.float32,
+                dtype=np.float32,
                 seed=self.seed
             )
         def init_w_i(shape, dtype=None):
@@ -350,7 +349,7 @@ class QuaternionDense(Layer):
                 kernel_shape,
                 mean=0,
                 scale=s,
-                dtype=tf.float32,
+                dtype=np.float32,
                 seed=self.seed
             )
         def init_w_j(shape, dtype=None):
@@ -358,7 +357,7 @@ class QuaternionDense(Layer):
                 kernel_shape,
                 mean=0,
                 scale=s,
-                dtype=tf.float32,
+                dtype=np.float32,
                 seed=self.seed
             )
         def init_w_k(shape, dtype=None):
@@ -366,7 +365,7 @@ class QuaternionDense(Layer):
                 kernel_shape,
                 mean=0,
                 scale=s,
-                dtype=tf.float32,
+                dtype=np.float32,
                 seed=self.seed
             )
         if self.kernel_initializer in {'quaternion'}:

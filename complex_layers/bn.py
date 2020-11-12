@@ -13,11 +13,10 @@ import numpy as np
 from keras.layers import Layer, InputSpec
 from keras import initializers, regularizers, constraints
 import keras.backend as K
-import tensorflow as tf
 
 
 def sqrt_init(shape, dtype=None):
-    value = (1 / tf.sqrt(4.0)) * tf.ones(shape)
+    value = (1 / np.sqrt(4.0)) * np.ones(shape)
     return value
 
 
@@ -54,8 +53,8 @@ def complex_standardization(input_centred, Vrr, Vii, Vri,
     # delta = (Vrr * Vii) - (Vri ** 2) = Determinant. Guaranteed >= 0 because SPD
     delta = (Vrr * Vii) - (Vri ** 2)
 
-    s = tf.sqrt(delta) # Determinant of square root matrix
-    t = tf.sqrt(tau + 2 * s)
+    s = np.sqrt(delta) # Determinant of square root matrix
+    t = np.sqrt(tau + 2 * s)
 
     # The square root matrix could now be explicitly formed as
     #       [ Vrr+s Vri   ]

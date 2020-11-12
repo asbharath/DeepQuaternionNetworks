@@ -14,7 +14,6 @@ from keras import activations, initializers, regularizers, constraints
 from keras.layers import Lambda, Layer, InputSpec, Convolution1D, Convolution2D, add, multiply, Activation, Input, concatenate
 from keras.layers.convolutional import _Conv
 from keras.layers.merge import _Merge
-from keras.layers.recurrent import Recurrent
 from keras.utils import conv_utils
 from keras.models import Model
 from .bn import QuaternionBN as quaternion_normalization
@@ -115,7 +114,7 @@ class QuaternionConv(Layer):
         self.kernel_size = conv_utils.normalize_tuple(kernel_size, rank, 'kernel_size')
         self.strides = conv_utils.normalize_tuple(strides, rank, 'strides')
         self.padding = conv_utils.normalize_padding(padding)
-        self.data_format = 'channels_last' if rank == 1 else conv_utils.normalize_data_format(data_format)
+        self.data_format = 'channels_last' if rank == 1 else K.normalize_data_format(data_format)
         self.dilation_rate = conv_utils.normalize_tuple(dilation_rate, rank, 'dilation_rate')
         self.activation = activations.get(activation)
         self.use_bias = use_bias
