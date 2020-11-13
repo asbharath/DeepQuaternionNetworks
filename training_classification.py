@@ -113,7 +113,7 @@ def schedule(epoch):
         if epoch == 0:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >=  10 and epoch < 100:
-        lrate = 0.1
+        lrate = 0.01 # Loss nan when set at 0.1 conflicting with the paper.
         if epoch == 10:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >= 100 and epoch < 120:
