@@ -26,7 +26,7 @@ from keras.regularizers import l2
 from keras.utils.np_utils import to_categorical
 import keras.backend as K
 K.set_image_data_format('channels_first')
-# K.set_image_dim_ordering('th')
+# K.common.set_image_dim_ordering('th') # not used as dockerfile sets keras backend as theano with channel first
 
 
 # Callbacks:
@@ -113,7 +113,7 @@ def schedule(epoch):
         if epoch == 0:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >=  10 and epoch < 100:
-        lrate = 0.01 # Loss nan when set at 0.1 conflicting with the paper.
+        lrate = 0.01 # Loss nan when set at 0.1 conflicting with the paper. Doesn't work for Quaternion
         if epoch == 10:
             L.getLogger("train").info("Current learning rate value is "+str(lrate))
     elif epoch >= 100 and epoch < 120:
